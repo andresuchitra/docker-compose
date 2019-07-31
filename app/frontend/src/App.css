@@ -1,0 +1,14 @@
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+img {
+  padding: 0.2rem;
+  width: 250px;
+  height: 250px;
+}
+.block {
+  display: block;
+}

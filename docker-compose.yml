@@ -1,0 +1,36 @@
+version: '3.6'
+# Coba cek ga pakai links masih bisa atau engga
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+  backend:
+    container_name: web
+    build:
+      context: ./app/backend
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3000'
+    volumes:
+      - './app/:/usr/local/application'
+      - '/usr/local/application/backend/node_modules'
+  client:
+    build:
+      context: ./app/frontend
+      dockerfile: Dockerfile
+    volumes:
+      - './client:/var/www/html'
+      - '/var/www/html/node_modules'
+  # client_dev:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - './client:/var/www/html'
+  #     - '/var/www/html/node_modules'
+  #   ports:
+  #     - '3002:3000'
+  #   command: ['npm', 'run', 'start']
