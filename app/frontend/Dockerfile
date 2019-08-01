@@ -4,7 +4,7 @@ LABEL author="Andre Suchitra"
 
 WORKDIR /var/www/html
 
-COPY . .
+COPY ./package.json .
 
 RUN apk update \
   && apk add --update python python-dev py-pip build-base \
@@ -13,7 +13,9 @@ RUN apk update \
   && npm install \ 
   && apk add --no-cache bash
 
+RUN npm install
+
 ENV TZ=Asia/Jakarta
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-CMD ["npm", "run", "build"]
+CMD ["npm", "run", "start"]
